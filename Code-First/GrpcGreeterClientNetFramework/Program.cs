@@ -22,7 +22,7 @@ namespace GrpcGreeterClientNetFramework
             }
             finally
             {
-                channel.ShutdownAsync().GetAwaiter().GetResult();
+                await channel.ShutdownAsync();
             }
         }
     }
