@@ -3,12 +3,14 @@ using ProtoBuf.Grpc;
 
 public class GreeterService : IGreeterService
 {
-    public Task<HelloReply> SayHelloAsync(HelloRequest request, CallContext context = default)
+    public async Task<HelloReply> SayHelloAsync(HelloRequest request, CallContext context = default)
     {
-        return Task.FromResult(
-                new HelloReply
-                {
-                    Message = $"Hello {request.Name}"
-                });
+        await Task.Delay(TimeSpan.FromSeconds(1));
+
+        //return new HelloReply
+        //{
+        //    Message = $"Hello {request.Name}"
+        //};
+        return null;
     }
 }
