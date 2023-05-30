@@ -20,6 +20,18 @@ namespace GrpcGreeterClientNetFramework
 
                 Console.WriteLine(reply.Message);
             }
+            catch(RpcException rpcEx)
+            {
+                if(rpcEx.StatusCode == StatusCode.Cancelled && rpcEx.Status.Detail == "No message returned from method.")
+                {
+                    Console.WriteLine("Return Null");
+                }
+                Console.WriteLine(rpcEx.Message);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             finally
             {
                 await channel.ShutdownAsync();
