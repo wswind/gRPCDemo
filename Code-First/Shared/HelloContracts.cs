@@ -7,7 +7,7 @@ namespace Shared.Contracts
 {
     [ProtoContract]
     [ProtoInclude(1, typeof(HelloReply))]
-    public abstract class EmptyProto
+    public abstract class EmptyReply
     {
         [ProtoMember(1000)]
         public bool IsEmpty { get; set; }
@@ -20,7 +20,7 @@ namespace Shared.Contracts
 
 
     [ProtoContract]
-    public class HelloReply : EmptyProto
+    public class HelloReply : EmptyReply
     {
         [ProtoMember(1)]
         public string Message { get; set; }
