@@ -5,16 +5,25 @@ using System.Threading.Tasks;
 
 namespace Shared.Contracts
 {
+    /// <summary>
+    /// 空返回的父类
+    /// 子类都要包含在 ProtoInclude
+    /// </summary>
     [ProtoContract]
     [ProtoInclude(1, typeof(HelloReply))]
     public abstract class EmptyReply
     {
+        /// <summary>
+        /// 是否为空
+        /// 固定序号为 1000，不能与子类重复
+        /// </summary>
         [ProtoMember(1000)]
         public bool IsEmpty { get; set; }
 
-        public void SetEmpty()
+        public static T GetEmptyReply<T>() where T : EmptyReply, new()
         {
-            IsEmpty = true;
+            var empty = new T() { IsEmpty = true };
+            return empty;
         }
     }
 
