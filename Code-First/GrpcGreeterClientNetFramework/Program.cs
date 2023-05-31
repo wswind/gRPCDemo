@@ -18,7 +18,7 @@ namespace GrpcGreeterClientNetFramework
                 var reply = await client.SayHelloAsync(
                     new HelloRequest { Name = "GreeterClient" });
 
-                Console.WriteLine(reply.Message);
+                Console.WriteLine($"{reply.Code} {reply.Msg}");
             }
             catch(RpcException rpcEx)
             {
