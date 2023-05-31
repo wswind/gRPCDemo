@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using Grpc.Core.Interceptors;
 using ProtoBuf.Grpc.Client;
 using Shared.Contracts;
 using System;
@@ -11,10 +12,12 @@ namespace GrpcGreeterClientNetFramework
         static async Task Main(string[] args)
         {
             var channel = new Channel("localhost", 5186, ChannelCredentials.Insecure);
+            var clientInterceptor = new MyInterceptor();
+            var interceptingInvoker = channel.Intercept(clientInterceptor);
 
             try
             {
-                var client = channel.CreateGrpcService<IGreeterService>();
+                var client = interceptingInvoker.CreateGrpcService<IGreeterService>();
                 var reply = await client.SayHelloAsync(
                     new HelloRequest { Name = "GreeterClient" });
                 if(reply.IsEmpty)
@@ -38,6 +41,8 @@ namespace GrpcGreeterClientNetFramework
             {
                 await channel.ShutdownAsync();
             }
+
+            Console.ReadLine();
         }
     }
 }

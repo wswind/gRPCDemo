@@ -7,6 +7,7 @@ public class GreeterService : IGreeterService
     {
         await Task.Delay(TimeSpan.FromSeconds(1));
 
-        return EmptyReply.GetEmptyReply<HelloReply>();
+        //return EmptyReply.GetEmptyReply<HelloReply>();
+        return null;
     }
 }
