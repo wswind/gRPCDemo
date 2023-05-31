@@ -17,8 +17,10 @@ namespace GrpcGreeterClientNetFramework
                 var client = channel.CreateGrpcService<IGreeterService>();
                 var reply = await client.SayHelloAsync(
                     new HelloRequest { Name = "GreeterClient" });
-
-                Console.WriteLine($"{reply.Code} {reply.Msg}");
+                if(reply.IsEmpty)
+                {
+                    Console.WriteLine("This is an empty message");
+                }
             }
             catch(RpcException rpcEx)
             {

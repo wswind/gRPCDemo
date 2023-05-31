@@ -8,7 +8,8 @@ public class GreeterService : IGreeterService
         await Task.Delay(TimeSpan.FromSeconds(1));
 
         var msg = new HelloReply();
-        msg.SetReturnNull();
+        msg.SetEmpty();
+
         return msg;
     }
 }
